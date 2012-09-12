@@ -77,7 +77,8 @@ class Puppet::Provider::Keystone < Puppet::Provider
       list
     end
     def self.get_keystone_object(type, id, attr)
-      auth_keystone("#{type}-get", id).split(/\|\n/m).each do |line|  
+        id=id.split("\n")
+        auth_keystone("#{type}-get", id).split(/\|\n/m).each do |line|  
         if line =~ /\|(\s+)?#{attr}(\s+)?\|/
           if line.kind_of?(Array)
             return line[0].split("|")[2].strip
